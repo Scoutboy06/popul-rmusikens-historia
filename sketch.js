@@ -82,7 +82,7 @@ const data = [
 		when: '1970-talet',
 		where: 'Jamaica',
 		how: 'Musiken som har ett skönt gung blev populär. Minst ett instrument spelar i baktakt.',
-		songSrc: 'https://www.youtube-nocookie.com/embed/LanCLS_hIo4&list=RDLanCLS_hIo4&start_radio=1',
+		songSrc: 'https://www.youtube-nocookie.com/embed/LanCLS_hIo4',
 	},
 	{
 		name: 'glamrock',
