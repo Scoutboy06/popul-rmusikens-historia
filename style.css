@@ -1,0 +1,41 @@
+* {
+	box-sizing: border-box;
+}
+
+body,
+html {
+	font-family: sans-serif, Arial;
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	/* overflow: hidden; */
+}
+
+#root {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#top {
+}
+
+#bottom {
+}
+
+#nextBtn {
+	position: fixed;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+#iframe {
+}
+
+.hidden {
+	display: none;
+}
