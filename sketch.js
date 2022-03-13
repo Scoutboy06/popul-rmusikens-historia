@@ -105,6 +105,7 @@ const iframe = $('#iframe');
 function next() {
 	answerEl.classList.add('hidden');
 	iframe.removeAttribute('src');
+	iframe.classList.add('hidden');
 
 	const genre = data[Math.floor(Math.random() * data.length)];
 	const questionIndex = Math.floor(Math.random() * 4);

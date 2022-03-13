@@ -39,3 +39,8 @@ hr {
 .hidden {
 	display: none;
 }
+
+#answer.hidden {
+	display: block;
+	visibility: hidden;
+}
