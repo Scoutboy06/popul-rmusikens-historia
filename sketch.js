@@ -1,4 +1,3 @@
-// https://www.youtube-nocookie.com/embed/wKRL7vkWMoc
 
 const data = [
 	{
@@ -104,13 +103,15 @@ const iframe = $('#iframe');
 
 
 function next() {
-	const genre = data[0] //Math.floor(Math.random() * data.length)];
+	answerEl.classList.add('hidden');
+	iframe.removeAttribute('src');
 
+	const genre = data[Math.floor(Math.random() * data.length)];
 	const questionIndex = Math.floor(Math.random() * 4);
 
 	let question, answer;
 
-	if (questionIndex) {
+	if (questionIndex === 3) {
 		if (!genre.songSrc) return next();
 
 		questionEl.textContent = 'Vilken genre är detta?'
@@ -122,15 +123,15 @@ function next() {
 	}
 
 	switch (questionIndex) {
-		case 0: // När
+		case 0: // När?
 			question = `När bildades ${genre.name}?`;
 			answer = genre.when;
 			break;
-		case 1: // Var
+		case 1: // Var?
 			question = `Var bildades ${genre.name}?`;
 			answer = genre.where;
 			break;
-		case 2: // Hur
+		case 2: // Hur?
 			question = `Hur bildades ${genre.name}?`;
 			answer = genre.how;
 			break;
@@ -140,4 +141,18 @@ function next() {
 	answerEl.textContent = answer;
 }
 
+function showAnswer() {
+	answerEl.classList.remove('hidden');
+}
+
 next();
+
+
+showBtn.addEventListener('click', showAnswer);
+
+nextBtn.addEventListener('click', next);
+
+window.addEventListener('keydown', e => {
+	if (e.key === 'ArrowRight') next();
+	else if (e.key === ' ' || e.key === 'Enter') showAnswer();
+});

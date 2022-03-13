@@ -20,10 +20,13 @@ html {
 	flex-direction: column;
 }
 
-#top {
+#root > * {
+	margin-top: 15px;
 }
 
-#bottom {
+hr {
+	width: 540px;
+	max-width: 80vw;
 }
 
 #nextBtn {
@@ -31,9 +34,6 @@ html {
 	right: 10px;
 	top: 50%;
 	transform: translateY(-50%);
-}
-
-#iframe {
 }
 
 .hidden {
