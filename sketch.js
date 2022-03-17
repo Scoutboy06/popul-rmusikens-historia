@@ -93,8 +93,6 @@ const data = [
 	},
 ];
 
-let remaining = resetRemaining();
-
 const $ = s => document.querySelector(s);
 
 const questionEl = $('#question');
@@ -109,13 +107,9 @@ function next() {
 	iframe.removeAttribute('src');
 	iframe.classList.add('hidden');
 
-	const genreIndex = random(0, remaining.length);
+	const genreIndex = random(0, data.length);
 	const genre = data[genreIndex];
-	const remainingGenre = remaining[genreIndex];
-	const questionIndex = random(remainingGenre);
-	
-	// alert(remainingGenre);
-	// alert(questionIndex);
+	const questionIndex = random(0, 4);
 
 	let question, answer;
 
@@ -147,28 +141,12 @@ function next() {
 		questionEl.textContent = question;
 		answerEl.textContent = answer;
 	}
-	
-	remaining[genreIndex].splice(questionIndex, 1);
-	if(remaining[genreIndex].length === 0) remaining.splice(genreIndex, 1);
-	if(remaining.length === 0) remaining = resetRemaining();
 }
 
 next();
 
 function showAnswer() {
 	answerEl.classList.remove('hidden');
-}
-
-function resetRemaining() {
-	let res = data.map(category => {
-		let arr;
-
-		if(category.songSrc) arr = [0, 1, 2, 3];
-		else arr = [0, 1, 2];
-		
-		return arr;
-	});
-	return res;
 }
 
 function random(a, b) {
