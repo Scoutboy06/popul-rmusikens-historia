@@ -93,6 +93,8 @@ const data = [
 	},
 ];
 
+let remaining = resetRemaining();
+
 const $ = s => document.querySelector(s);
 
 const questionEl = $('#question');
@@ -107,8 +109,13 @@ function next() {
 	iframe.removeAttribute('src');
 	iframe.classList.add('hidden');
 
-	const genre = data[Math.floor(Math.random() * data.length)];
-	const questionIndex = Math.floor(Math.random() * 4);
+	const genreIndex = random(0, remaining.length);
+	const genre = data[genreIndex];
+	const remainingGenre = remaining[genreIndex];
+	const questionIndex = random(remainingGenre);
+	
+	// alert(remainingGenre);
+	// alert(questionIndex);
 
 	let question, answer;
 
@@ -119,34 +126,60 @@ function next() {
 		iframe.classList.remove('hidden');
 		iframe.src = genre.songSrc;
 		answerEl.textContent = genre.name;
-
-		return;
 	}
 
-	switch (questionIndex) {
-		case 0: // När?
-			question = `När bildades ${genre.name}?`;
-			answer = genre.when;
-			break;
-		case 1: // Var?
-			question = `Var bildades ${genre.name}?`;
-			answer = genre.where;
-			break;
-		case 2: // Hur?
-			question = `Hur bildades ${genre.name}?`;
-			answer = genre.how;
-			break;
-	}
+	else {
+		switch (questionIndex) {
+			case 0: // När?
+				question = `När bildades ${genre.name}?`;
+				answer = genre.when;
+				break;
+			case 1: // Var?
+				question = `Var bildades ${genre.name}?`;
+				answer = genre.where;
+				break;
+			case 2: // Hur?
+				question = `Hur bildades ${genre.name}?`;
+				answer = genre.how;
+				break;
+		}
 
-	questionEl.textContent = question;
-	answerEl.textContent = answer;
+		questionEl.textContent = question;
+		answerEl.textContent = answer;
+	}
+	
+	remaining[genreIndex].splice(questionIndex, 1);
+	if(remaining[genreIndex].length === 0) remaining.splice(genreIndex, 1);
+	if(remaining.length === 0) remaining = resetRemaining();
 }
+
+next();
 
 function showAnswer() {
 	answerEl.classList.remove('hidden');
 }
 
-next();
+function resetRemaining() {
+	let res = data.map(category => {
+		let arr;
+
+		if(category.songSrc) arr = [0, 1, 2, 3];
+		else arr = [0, 1, 2];
+		
+		return arr;
+	});
+	return res;
+}
+
+function random(a, b) {
+  if(typeof a === 'object' && a.length) {
+    return a[Math.floor(Math.random() * a.length)];
+  }
+  else if(typeof a === 'number' && typeof b === 'number') {
+		return Math.floor(Math.random() * (b - a)) + a;
+  }
+}
+
 
 
 showBtn.addEventListener('click', showAnswer);
